@@ -42,12 +42,7 @@
 }
 
 .logo2 {
-<<<<<<< HEAD
     height: 56px;
-=======
-    height: 60px;
-    float: left;
->>>>>>> 1a4be23a2e8a20843aedf04c01e69a8ae206ee8c
 }
 
 .menu-btn {
@@ -94,16 +89,13 @@
 }
 
 .el-menu-item {
-<<<<<<< HEAD
     padding-left: 64px !important;
-=======
     background: #1f2d3d !important;
     padding-left: 64px !important;
 }
 
 .el-menu-item:hover {
     background: rgb(38, 52, 69) !important;
->>>>>>> 1a4be23a2e8a20843aedf04c01e69a8ae206ee8c
 }
 
 .user-btn {
@@ -136,6 +128,13 @@
 .el-badge__content.is-fixed {
     top: 16px !important;
     right: 26px !important;
+}
+
+.app-main {
+    background: #f5f7f9;
+    margin: 0px;
+    padding: 0px;
+    min-width: 1000px;
 }
 
 .footer {

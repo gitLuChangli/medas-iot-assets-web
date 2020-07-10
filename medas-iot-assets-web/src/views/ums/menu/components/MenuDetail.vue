@@ -76,9 +76,12 @@
 				}
 			}
 		},
+		created() {
+			console.log(this.$route)
+		},
 		mounted() {
-			if (this.modify) {
-				getMenu(this.$router.query.id).then(res => {
+			if (this.modify) {				
+				getMenu(this.$route.query.id).then(res => {
 					if (res.data.code === 200) {
 						this.menu = res.data.data
 					}

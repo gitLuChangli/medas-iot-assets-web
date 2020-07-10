@@ -19,6 +19,7 @@
     "echarts": "^4.6.0",
     "element-ui": "^2.13.0",
     "es6-promise": "^4.2.8",
+    "js-cookie": "^2.2.1",
     "prettier": "^1.19.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
