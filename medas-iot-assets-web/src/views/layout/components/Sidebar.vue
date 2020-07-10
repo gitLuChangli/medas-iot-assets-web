@@ -51,7 +51,7 @@ export default {
 						items: [
 							{
 								name: '主控台',
-								path: '/main',
+								path: '/main'
 							},
 							{
 								name: '監控台',
@@ -148,15 +148,15 @@ export default {
 						},
 						{
 							name: '資源列表',
-							path: '/system/resource'
+							path: '/ums/resource'
 						},
 						{
 							name: '部門列表',
-							path: '/system/company'
+							path: '/ums/company'
 						},
 						{
 							name: '用戶列表',
-							path: '/system/user'
+							path: '/ums/user'
 						}]
 					},
 					{

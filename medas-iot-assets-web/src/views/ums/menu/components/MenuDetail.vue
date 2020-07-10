@@ -28,8 +28,8 @@
 			</el-form-item>
 			<el-form-item label="是否顯示">
 				<el-radio-group v-model="menu.hidden" style="width: 100%;">
-					<el-radio :label="0">是</el-radio>
-					<el-radio :label="1">否</el-radio>
+					<el-radio :label="1">是</el-radio>
+					<el-radio :label="0">否</el-radio>
 				</el-radio-group>
 			</el-form-item>
 			<el-form-item label="排序">
@@ -60,7 +60,7 @@
 					parentId: 0,
 					name: '',
 					icon: '',
-					hidden: 0,
+					hidden: 1,
 					sort: 0
 				},
 				selectMenuList: [],
@@ -76,11 +76,8 @@
 				}
 			}
 		},
-		created() {
-			console.log(this.$route)
-		},
 		mounted() {
-			if (this.modify) {				
+			if (this.modify) {
 				getMenu(this.$route.query.id).then(res => {
 					if (res.data.code === 200) {
 						this.menu = res.data.data
@@ -125,7 +122,9 @@
 					}
 				})
 			},
-			resetForm: function (e) { },
+			resetForm: function (e) {
+				this.$refs.menu.resetFileds()
+			},
 			backClick: function (e) {
 				this.$router.back(-1)
 			}

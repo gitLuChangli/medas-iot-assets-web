@@ -1,202 +1,203 @@
 * {
-    margin: 0px;
-    padding: 0px;
-    font-size: 14px;
-    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft JhengHei",
+    "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container-main {
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
-    height: 100%;
-    width: 100%;
-    position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 .logo-container {
-    width: 200px;
-    height: 59px;
-    align-items: center;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    border-bottom: 1px solid #4d4c61;
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-    clear: both;
+  width: 200px;
+  height: 59px;
+  align-items: center;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  border-bottom: 1px solid #4d4c61;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  clear: both;
 }
 
 .header {
-    margin-left: 0px;
-    padding-left: 0px;
-    border-bottom: 1px solid #e6eae3;
+  margin-left: 0px;
+  padding-left: 0px;
+  border-bottom: 1px solid #e6eae3;
 }
 
 .logo {
-    height: 48px;
+  height: 48px;
 }
 
 .logo2 {
-    height: 56px;
+  height: 56px;
 }
 
 .menu-btn {
-    font-size: 20px;
-    width: 48px;
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-    font-style: bold;
-    float: left;
-    cursor: default;
+  font-size: 20px;
+  width: 48px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-style: bold;
+  float: left;
+  cursor: default;
 }
 
 .menu-btn:hover,
 .user-btn:hover,
 .u-bage:hover {
-    color: #6699ff;
-    background: #6699ff22;
-    transition: all .5s;
-    border-radius: 0;
+  color: #6699ff;
+  background: #6699ff22;
+  transition: all 0.5s;
+  border-radius: 0;
 }
 
 .el-menu-item {
-    background: #333333 !important;
+  background: #333333 !important;
 }
 
 .el-menu-item:hover {
-    background: #222222 !important;
+  background: #222222 !important;
 }
 
 .el-menu-item.is-active {
-    font-weight: bolder !important;
-    color: #ffffff !important;
-    background: #6699ff !important;
+  font-weight: bolder !important;
+  color: #ffffff !important;
+  background: #6699ff !important;
 }
 
 .el-menu-item i,
 .el-submenu__title i {
-    margin-right: 8px !important;
+  margin-right: 8px !important;
 }
 
 .el-submenu__title span {
-    margin-left: 8px !important;
+  margin-left: 8px !important;
 }
 
 .el-menu-item {
-    padding-left: 64px !important;
-    background: #1f2d3d !important;
-    padding-left: 64px !important;
+  padding-left: 64px !important;
+  background: #1f2d3d !important;
+  padding-left: 64px !important;
 }
 
 .el-menu-item:hover {
-    background: rgb(38, 52, 69) !important;
+  background: rgb(38, 52, 69) !important;
 }
 
 .user-btn {
-    height: 60px;
-    margin: 0px;
-    padding: 0px 1px;
-    line-height: 60px;
-    border: none;
-    border-radius: 0;
+  height: 60px;
+  margin: 0px;
+  padding: 0px 1px;
+  line-height: 60px;
+  border: none;
+  border-radius: 0;
 }
 
 .u-bage {
-    float: right;
-    height: 60px;
-    padding-left: 16px;
-    padding-right: 16px;
+  float: right;
+  height: 60px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .u-bage i {
-    height: 36px;
-    margin: 2px;
-    display: block;
-    font-size: 18px;
-    font-weight: bolder;
-    line-height: 28px;
-    margin-top: 16px;
-    color: #383838;
+  height: 36px;
+  margin: 2px;
+  display: block;
+  font-size: 18px;
+  font-weight: bolder;
+  line-height: 28px;
+  margin-top: 16px;
+  color: #383838;
 }
 
 .el-badge__content.is-fixed {
-    top: 16px !important;
-    right: 26px !important;
+  top: 16px !important;
+  right: 26px !important;
 }
 
 .app-main {
-    background: #f5f7f9;
-    margin: 0px;
-    padding: 0px;
-    min-width: 1000px;
+  background: #f5f7f9;
+  margin: 0px;
+  padding: 0px;
+  min-width: 1000px;
 }
 
 .footer {
-    height: 32px !important;
-    line-height: 32px !important;
-    text-align: center;
-    color: #484848;
-    border-top: 1px solid #e6eae3;
+  height: 32px !important;
+  line-height: 32px !important;
+  text-align: center;
+  color: #484848;
+  border-top: 1px solid #e6eae3;
 }
 
 .toolbar {
-    margin: 0px;
-    background: #ffffff;
-    padding: 10px 16px;
-    height: 28px;
-    border-bottom: 1px solid #e6eae3;
+  margin: 0px;
+  background: #ffffff;
+  padding: 10px 16px;
+  height: 28px;
+  border-bottom: 1px solid #e6eae3;
 }
 
 .toolbar .btn {
-    float: right;
-    clear: both;
+  float: right;
+  margin-left: 8px;
 }
 
 .title {
-    font-size: 18px;
-    line-height: 28px;
+  font-size: 18px;
+  line-height: 28px;
 }
 
 .content {
-    background: #ffffff;
-    margin: 16px;
-    padding: 16px;
+  background: #ffffff;
+  margin: 16px;
+  padding: 16px;
 }
 
 .form {
-    width: 500px;
-    margin: 16px auto;
-    background: #ffffff;
-    padding: 16px;
+  width: 500px;
+  margin: 16px auto;
+  background: #ffffff;
+  padding: 16px;
 }
 
 .dialog-w {
-    width: 840px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 840px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .dialog-n {
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .card-300 {
-    width: 300px;
-    float: left;
-    margin: 4px;
+  width: 300px;
+  float: left;
+  margin: 4px;
 }
 
 .hamburger-container {
-    line-height: 16px;
-    height: 16px;
-    float: left;
-    padding: 22px 16px;
+  line-height: 16px;
+  height: 16px;
+  float: left;
+  padding: 22px 16px;
 }

@@ -13,7 +13,8 @@
 				<el-button slot="append" icon="el-icon-search" @click="queryRoles"></el-button>
 			</el-input>
 			<el-button
-				type="primary el-icon-plus"
+				type="primary"
+				icon="el-icon-plus"
 				circle
 				style="float: right; clear: both"
 				size="mini"
@@ -49,9 +50,9 @@
 			<el-pagination
 				@size-change="queryRoles"
 				@current-change="queryRoles"
-				:current-page.sync="qp.page"
+				:current-page.sync="qp.pageNum"
 				:page-sizes="[10, 20, 30, 50]"
-				:page-size="qp.size"
+				:page-size="qp.pageSize"
 				layout="total, prev, pager, next"
 				:hide-on-single-page="false"
 				:total="total"
@@ -102,12 +103,12 @@
 					status: 1
 				},
 				rules: {
-					name: [{ required: true, message: '請輸入角色名稱', trigger: 'blur' }],
+					name: [{ required: true, message: '請輸入角色名稱', trigger: 'blur' }]
 				},
 				qp: {
 					keyword: null,
-					page: 1,
-					size: 10
+					pageNum: 1,
+					pageSize: 10
 				},
 				total: 0
 			}
@@ -158,7 +159,6 @@
 							this.showSuccess(`刪除成功`)
 							this.queryRoles()
 						} else {
-							val.status = val.status === 0 ? 0 : 1
 							this.showError(`刪除失敗`)
 						}
 					})
@@ -181,7 +181,7 @@
 						} else {
 							createRole(this.role).then(res => {
 								if (res.data.code === 200) {
-									this.showSuccess(t`新增成功`)
+									this.showSuccess(`新增成功`)
 									this.show_dialog = false
 									this.clearCache()
 									this.queryRoles()

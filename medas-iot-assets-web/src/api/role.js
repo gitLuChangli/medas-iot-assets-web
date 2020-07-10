@@ -14,8 +14,8 @@ export async function createRole(role) {
 
 /**
  * 修改角色信息
- * @param {*} roleid 
- * @param {*} role 
+ * @param {*} roleid 角色編號
+ * @param {*} role 角色信息
  */
 export async function updateRole(roleid, role) {
     return axios({
@@ -37,13 +37,13 @@ export async function fetchAllRoleList() {
 
 /**
  * 獲取角色信息
- * @param {*} param 
+ * @param {*} param 查詢條件
  */
 export async function fetchList(param) {
     return axios({
         url: `/role/list`,
         method: `get`,
-        data: param
+        param: param
     })
 }
 

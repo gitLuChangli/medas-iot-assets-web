@@ -41,7 +41,7 @@ export async function fetchList(parentid, params) {
     return axios({
         url: `/menu/list/${parentid}`,
         method: `get`,
-        data: params
+        params: params
     })
 }
 
