@@ -36,6 +36,18 @@ export default new Router({
                 import('@/views/ums/role/index'),
             meta: { title: '角色列表' }
         }, {
+            path: 'role-menu',
+            name: 'role-menu',
+            component: () =>
+                import('@/views/ums/role/role-menu'),
+            meta: { title: '分配菜單' }
+        }, {
+            path: 'role-resource',
+            name: 'role-resource',
+            component: () =>
+                import('@/views/ums/role/role-resource'),
+            meta: { title: '分配資源' }
+        }, {
             path: 'menu',
             name: 'menu',
             component: () =>
@@ -69,6 +81,18 @@ export default new Router({
             component: () =>
                 import('@/views/ums/resource/category'),
             meta: { title: '資源分類' }
+        }, {
+            path: 'company',
+            name: 'company',
+            component: () =>
+                import('@/views/ums/company/index'),
+            meta: { title: '部門列表' }
+        }, {
+            path: 'admin',
+            name: 'admin',
+            component: () =>
+                import('@/views/ums/admin/index'),
+            meta: { title: '用戶列表' }
         }
         ]
     }

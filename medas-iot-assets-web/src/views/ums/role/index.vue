@@ -22,11 +22,18 @@
 			/>
 		</div>
 		<div class="content">
-			<el-table :data="roles" style="width: 100%; margin-bottom: 20px;" border stripe size="mini">				
+			<el-table
+				:data="roles"
+				style="width: 100%; margin-bottom: 20px;"
+				border
+				stripe
+				size="mini"
+				v-loading="listLoading"
+			>
 				<el-table-column prop="name" label="角色名稱" align="center" />
 				<el-table-column prop="description" label="描述" align="center" />
 				<el-table-column prop="adminCount" label="用户数" align="center" />
-                <el-table-column prop="createTime" label="添加時間" align="center" />
+				<el-table-column prop="createTime" label="添加時間" align="center" />
 				<el-table-column label="操作" align="center" width="300px" fixed="right">
 					<template slot-scope="scope">
 						<el-button size="mini" type="text" @click="menuClick(scope.row)">分配菜單</el-button>
@@ -81,7 +88,7 @@
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" size="small" @click="saveClick">確定</el-button>
-					<el-button size="small" @click="resetClick">重置</el-button>
+					<el-button size="small" v-if="!modify" @click="resetClick">重置</el-button>
 				</el-form-item>
 			</el-form>
 		</el-dialog>
@@ -110,7 +117,8 @@
 					pageNum: 1,
 					pageSize: 10
 				},
-				total: 0
+				total: 0,
+				listLoading: false
 			}
 		},
 		mounted() {
@@ -136,19 +144,19 @@
 					}
 				})
 			},
-			menuClick: function (val) {
-
+			menuClick: function (row) {
+				this.$router.push(`/ums/role-menu?roleId=${row.id}`)
 			},
-			resourceClick: function (val) {
-
+			resourceClick: function (row) {
+				this.$router.push(`/ums/role-resource?roleId=${row.id}`)
 			},
 			editClick: function (val) {
 				this.role = Object.assign({}, val)
 				this.show_dialog = true
 				this.modify = true
-            },
-            deleteClick: function(val) {
-                this.$confirm(`此操作將徹底刪除 <strong>${val.name}</strong>, 是否繼續？`, '提示', {
+			},
+			deleteClick: function (val) {
+				this.$confirm(`此操作將徹底刪除 <strong>${val.name}</strong>, 是否繼續？`, '提示', {
 					confirmButtonText: '刪除',
 					cancelButtonText: '取消',
 					type: 'warning',
@@ -163,7 +171,7 @@
 						}
 					})
 				})
-            },
+			},
 			saveClick: function (e) {
 				this.$refs.role.validate(valid => {
 					if (valid) {
@@ -198,6 +206,7 @@
 				this.$refs.role.restFields()
 			},
 			queryRoles() {
+				this.listLoading = true
 				fetchList(this.qp).then(res => {
 					if (res.data.code === 200) {
 						this.roles = res.data.data.list
@@ -205,6 +214,7 @@
 					} else {
 						this.showError(`獲取失敗`)
 					}
+					this.listLoading = false
 				})
 			}
 		}

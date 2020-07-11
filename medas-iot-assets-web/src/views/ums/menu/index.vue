@@ -18,7 +18,7 @@
                 border
                 stripe
                 size="mini"
-                :loading="listLoading"
+                v-loading="listLoading"
             >
                 <el-table-column prop="title" label="菜單名稱" align="center" />
                 <el-table-column label="菜單級數" align="center">
@@ -97,6 +97,7 @@
 		},
 		methods: {
 			getList() {
+				this.listLoading = true
 				if (this.$route.query.parentId != null) {
 					this.parentId = this.$route.query.parentId
 				} else {
@@ -107,6 +108,7 @@
 						this.menus = res.data.data.list
 						this.total = res.data.data.total
 					}
+					this.listLoading = false
 				})
 			},
 			newClick: function (e) {

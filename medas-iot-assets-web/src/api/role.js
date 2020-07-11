@@ -52,8 +52,8 @@ export async function fetchList(param) {
  * @param {*} roleid 角色編號
  */
 export async function deleteRole(roleid) {
-    let ids = [];
-    ids.push(roleid);
+    let ids = []
+    ids.push(roleid)
     let params = new URLSearchParams()
     params.append("ids", ids)
     return axios({
@@ -72,5 +72,35 @@ export async function disableRole(roleid, status) {
     return axios({
         url: `/role/updateStatus/${roleid}?status=${status}`,
         method: `post`
+    })
+}
+
+export async function listMenuByRole(roleid) {
+    return axios({
+        url: `/role/listMenu/${roleid}`,
+        method: `get`
+    })
+}
+
+export async function listResourceByRole(roleid) {
+    return axios({
+        url: `/role/listResource/${roleid}`,
+        method: `get`
+    })
+}
+
+export async function allocMenu(data) {
+    return axios({
+        url: `/role/allocMenu`,
+        method: `post`,
+        data: data
+    })
+}
+
+export async function allocResource(data) {
+    return axios({
+        url: `/role/allocResource`,
+        method: `post`,
+        data: data
     })
 }

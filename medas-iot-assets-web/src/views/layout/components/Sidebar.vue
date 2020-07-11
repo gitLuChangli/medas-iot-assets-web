@@ -156,7 +156,7 @@ export default {
 						},
 						{
 							name: '用戶列表',
-							path: '/ums/user'
+							path: '/ums/admin'
 						}]
 					},
 					{
