@@ -51,7 +51,7 @@ export async function deleteCompany(companyId) {
  */
 export async function queryCompanies() {
     return axios({
-        url: `/api/company/descendants`,
+        url: `/api/company/`,
         method: `get`
     })
 }
