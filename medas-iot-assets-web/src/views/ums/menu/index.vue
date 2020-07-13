@@ -14,7 +14,6 @@
         <div class="content">
             <el-table
                 :data="menus"
-                style="width: 100%; margin-bottom: 20px;"
                 border
                 stripe
                 size="mini"

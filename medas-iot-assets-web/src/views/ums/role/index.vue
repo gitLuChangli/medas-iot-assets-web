@@ -5,7 +5,7 @@
 			<el-input
 				placeholder="請輸入名稱"
 				v-model="qp.keyword"
-				size="mini"
+				size="small"
 				style="width: 250px"
 				clearable
 				@clear="queryRoles"
@@ -24,7 +24,6 @@
 		<div class="content">
 			<el-table
 				:data="roles"
-				style="width: 100%; margin-bottom: 20px;"
 				border
 				stripe
 				size="mini"

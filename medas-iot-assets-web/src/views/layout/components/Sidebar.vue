@@ -75,6 +75,36 @@ export default {
 						]
 					},
 					{
+						name: '固定資產',
+						path: '/assets',
+						icon: 'el-icon-coin',
+						items: [
+							{
+								name: '導入資產',
+								path: '/assets/import'
+							},
+							{
+								name: '資產列表',
+								path: '/assets/list'
+							}
+						]
+					},
+					{
+						name: '資產盤點',
+						path: '/inventory',
+						icon: 'el-icon-s-claim',
+						items: [
+							{
+								name: '工單列表',
+								path: '/inventory/list'
+							},
+							{
+								name: '盤點記錄',
+								path: '/inventory/history'
+							}
+						]
+					},
+					{
 						name: '應用管理',
 						path: '/app',
 						icon: 'el-icon-s-promotion',
