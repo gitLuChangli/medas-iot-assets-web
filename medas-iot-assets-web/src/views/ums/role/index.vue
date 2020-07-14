@@ -60,7 +60,7 @@
 				:page-sizes="[10, 20, 30, 50]"
 				:page-size="qp.pageSize"
 				layout="total, prev, pager, next"
-				:hide-on-single-page="false"
+				:hide-on-single-page="true"
 				:total="total"
 			/>
 		</div>
@@ -94,7 +94,7 @@
 	</div>
 </template>
 <script>
-	import { createRole, updateRole, fetchList, disableRole, deleteRole } from '../../../api/role.js'
+	import { createRole, updateRole, fetchList, disableRole, deleteRole } from '@/api/role.js'
 	export default {
 		data() {
 			return {

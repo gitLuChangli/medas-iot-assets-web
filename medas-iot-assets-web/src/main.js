@@ -15,6 +15,8 @@ import echarts from 'echarts'
 import NProgress from '../static/nprogress/nprogress'
 import '../static/nprogress/nprogress.css'
 import '../static/style/style.css'
+import '../static/iconfont/iconfont.css'
+import AFTableColumn from 'af-table-column'
 
 promise.polyfill()
 Vue.config.productionTip = false
@@ -26,6 +28,8 @@ Vue.prototype.$store = store
 Vue.prototype.$echarts = echarts
 
 Vue.prototype.RES_URL = 'http://127.0.0.1:8081'
+
+Vue.use(AFTableColumn)
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'
 axios.defaults.withCredentials = true

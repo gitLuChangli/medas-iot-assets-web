@@ -43,7 +43,7 @@ export async function fetchList(param) {
     return axios({
         url: `/role/list`,
         method: `get`,
-        param: param
+        params: param
     })
 }
 

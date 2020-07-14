@@ -95,7 +95,7 @@ export default {
 						icon: 'el-icon-s-claim',
 						items: [
 							{
-								name: '工單列表',
+								name: '盤點工單',
 								path: '/inventory/list'
 							},
 							{
