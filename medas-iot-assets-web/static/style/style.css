@@ -1,7 +1,7 @@
 * {
   margin: 0px;
   padding: 0px;
-  font-size: 14px;
+  font-size: 13px;
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -182,7 +182,7 @@
 .content {
   background: #ffffff;
   margin: 16px;
-  padding: 16px;
+  padding: 8px;
 }
 
 .form {
@@ -223,3 +223,7 @@
   background: #ffffff;
   padding: 16px;
 }
+/**
+th {
+  background: rgb(236, 245, 255) !important;
+}*/

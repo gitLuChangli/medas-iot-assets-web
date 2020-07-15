@@ -5,7 +5,8 @@ const app = {
         sidebar: {
             opened: !+Cookies.get('sidebarStatus'),
             withoutAnimation: false
-        }
+        },
+        clientHeight: Cookies.get('clientHeight')
     },
 
     mutations: {
@@ -21,6 +22,10 @@ const app = {
             Cookies.set('sidebarStatus', 1)
             state.sidebar.opened = false
             state.sidebar.withoutAnimation = withoutAnimation
+        },
+        SET_HEIGHT: (state, height) => {
+            Cookies.set('clientHeight', height)
+            state.clientHeight = height
         }
     },
     actions: {
@@ -29,6 +34,9 @@ const app = {
         },
         CloseSideBar: ({ commit }) => {
             commit('CLOSE_SIDEBAR')
+        },
+        SetClientHeight: ({commit}, height) => {
+            commit('SET_HEIGHT', height)
         }
     }
 }

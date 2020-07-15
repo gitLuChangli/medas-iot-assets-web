@@ -12,19 +12,22 @@
 			>
 				<el-button slot="append" icon="el-icon-search" @click="queryAssets"></el-button>
 			</el-input>
-			<el-button
-				type="primary"
-				icon="el-icon-upload2"
-				circle
-				class="btn"
-				size="mini"
-				@click="newClick"
-			/>
 		</div>
 		<div class="content">
-			<el-table :data="assets" border stripe size="mini" v-loading="listLoading" :fit="true">
-				<el-table-column type="selection" width="40" />
-				<el-table-column type="index" width="50" align="center" fixed />
+			<el-table
+				:data="assets"
+				border
+				stripe
+				size="mini"
+				style="margin-bottom: 8px"
+				v-loading="listLoading"
+				:fit="true"
+				:max-height="clientHeight - 250"
+				ref="assetsTable"
+				@selection-change="handleSelection"
+				:row-key="rowKey"
+			>
+				<el-table-column type="selection" :reserve-selection="true" width="40" fixed />
 				<el-table-column
 					prop="gzhNum"
 					label="管制編號"
@@ -71,8 +74,12 @@
 				:total="total"
 			/>
 		</div>
-		<div class="toolbar" :class="sidebar.opened ? 'task-note' : 'task-note-w'">
-			已選擇：{{selected}} 件
+		<div
+			class="toolbar"
+			:class="sidebar.opened ? 'task-note' : 'task-note-w'"
+			v-show="selectedRows.length > 0"
+		>
+			已選擇：{{selectedRows.length}} 件
 			<el-button type="primary" size="mini" class="btn" @click="taskClick">創建盤點工單</el-button>
 		</div>
 	</div>
@@ -85,7 +92,7 @@
 		left: 200px;
 		z-index: 99;
 		overflow: hidden;
-		background: #E4E7ED;
+		background: #e4e7ed;
 	}
 	.task-note-w {
 		position: fixed;
@@ -94,16 +101,17 @@
 		left: 66px;
 		z-index: 99;
 		overflow: hidden;
-		background: #E4E7ED;
+		background: #e4e7ed;
 	}
 </style>
 <script>
 	import { mapGetters } from 'vuex'
-	import { queryAssets } from '@/api/assets'
+	import { queryAssets, createInventory } from '@/api/assets'
 	export default {
 		computed: {
 			...mapGetters([
-				'sidebar'
+				'sidebar',
+				'clientHeight'
 			])
 		},
 		data() {
@@ -117,13 +125,18 @@
 				listLoading: false,
 				companyId: '70321065267560448',
 				assets: [],
-				selected: 0
+				selected: 0,
+				mapSelection: new Map(),
+				selectedRows: []
 			}
 		},
 		mounted() {
 			this.queryAssets()
 		},
 		methods: {
+			rowKey: function (row) {
+				return row.id
+			},
 			queryAssets() {
 				this.listLoading = true
 				var params = Object.assign({}, this.qp)
@@ -150,7 +163,39 @@
 				this.qp.page = val
 				this.queryAssets()
 			},
-			taskClick: function (e) { }
+			taskClick: function (e) {
+				this.$confirm(`此操作將創建盤存工單，確認無誤後，點擊創建。`, '提示', {
+					confirmButtonText: '創建',
+					cancelButtonText: '取消',
+					type: 'warning',
+					dangerouslyUseHTMLString: true
+				}).then(() => {
+					let assetIds = []
+					this.selectedRows.forEach(element => {
+						assetIds.push(element.id)
+					})
+					let params = new URLSearchParams()
+					params.append('assetIds', assetIds)
+					createInventory(this.companyId, params).then(res => {
+						if (res.data.code === 200) {
+							this.showSuccess(`創建盤存工單成功`)
+							this.selectedRows = []
+							this.$refs.assetsTable.clearSelection()
+						} else {
+							this.showError(`創建盤存工單失敗`)
+						}
+					})
+				})
+			},
+			handleSelection: function (selection) {
+				this.assets.forEach(element => {
+					this.selectedRows.pop(element)
+				})
+				selection.forEach(element => {
+					this.selectedRows.push(element)
+				})
+				console.log(this.selectedRows)
+			}
 		}
 	}
 </script>

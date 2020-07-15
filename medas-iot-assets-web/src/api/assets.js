@@ -9,10 +9,17 @@ export async function importAssets(data) {
 }
 
 export async function queryAssets(companyId, params) {
-    console.log(params)
     return axios({
         url: `/api/asset/company/${companyId}`,
         method: `get`,
         params: params
+    })
+}
+
+export async function createInventory(companyId, assetIds) {
+    return axios({
+        url: `/api/asset/create/inventory/${companyId}`,
+        method: `post`,
+        params: assetIds
     })
 }

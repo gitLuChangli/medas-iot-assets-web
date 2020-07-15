@@ -46,7 +46,7 @@
 			return {
 				opened: false,
 				size: 28,
-				v: 0,
+				v: 0
 			}
 		},
 		methods: {

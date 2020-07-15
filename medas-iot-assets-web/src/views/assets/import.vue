@@ -16,7 +16,7 @@
 			>保存</el-button>
 		</div>
 		<div class="content" v-show="show_table">
-			<el-table :data="assets.assets" border stripe size="mini" v-loading="listLoading" :fit="true">
+			<el-table :data="assets.assets" border stripe size="mini" v-loading="listLoading" :max-height="clientHeight - 210" :fit="true">
 				<el-table-column type="index" width="50" align="center" fixed />
 				<el-table-column
 					prop="gzhNum"
@@ -80,8 +80,14 @@
 	</div>
 </template>
 <script>
+	import { mapGetters } from 'vuex'
 	import { importAssets } from '@/api/assets'
 	export default {
+		computed: {
+			...mapGetters([
+				'clientHeight'
+			])
+		},
 		data() {
 			return {
 				show_dialog: false,
@@ -99,6 +105,7 @@
 			},
 			clearClick: function (e) {
 				this.assets.assets = []
+				this.show_table = false
 			},
 			handlePreview: function (file) { },
 			handleRemove: function (file, fileList) { },
@@ -114,8 +121,8 @@
 				}
 			},
 			importClick: function (e) {
-				this.$confirm(`請先確認資產信息無誤后再保存。`, '提示', {
-					confirmButtonText: '繼續保存',
+				this.$confirm(`此操作將資產信息存儲在本系統中，確認無誤後，點擊保存。`, '提示', {
+					confirmButtonText: '保存',
 					cancelButtonText: '取消',
 					type: 'warning',
 					dangerouslyUseHTMLString: true

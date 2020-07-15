@@ -24,7 +24,12 @@ export default {
         Copyright
     },
     computed: {
-        
+    },
+    mounted() {
+        this.$store.dispatch('SetClientHeight', document.documentElement.clientHeight)
+        window.onresize = _ => {
+            this.$store.dispatch('SetClientHeight', document.documentElement.clientHeight)
+        }
     }
 }
 </script>
