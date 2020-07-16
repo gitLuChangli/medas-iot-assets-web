@@ -111,7 +111,7 @@
 			>
 				<el-form ref="userRole" :model="userRole" label-position="left" size="small" :rules="rules">
 					<el-form-item label="選擇角色">
-						<el-select v-model="userRole.roleIds" multiple placeholder="请选择" style="width: 100%">
+						<el-select v-model="userRole.roleIds" multiple placeholder="請選擇" style="width: 100%">
 							<el-option v-for="item in roles" :key="item.id" :label="item.name" :value="item.id"></el-option>
 						</el-select>
 					</el-form-item>

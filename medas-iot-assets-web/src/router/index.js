@@ -54,11 +54,17 @@ export default new Router({
                 import('@/views/inventory/index'),
             meta: { title: '盤點工單' }
         }, {
-            path: 'history',
-            name: 'history',
+            path: 'mine',
+            name: 'mine',
             component: () =>
-                import('@/views/inventory/history'),
-            meta: { title: '盤點記錄' }
+                import('@/views/inventory/mine'),
+            meta: { title: '我的工單' }
+        }, {
+            path: 'detials',
+            name: 'details',
+            component: () =>
+                import('@/views/inventory/details'),
+            meta: { title: '資產清單' }
         }]
     },
     {

@@ -99,8 +99,8 @@ export default {
 								path: '/inventory/list'
 							},
 							{
-								name: '盤點記錄',
-								path: '/inventory/history'
+								name: '我的工單',
+								path: '/inventory/mine'
 							}
 						]
 					},
