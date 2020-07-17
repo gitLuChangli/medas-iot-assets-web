@@ -23,8 +23,8 @@
 		</div>
 		<div class="content">
 			<el-table :data="users" border stripe size="mini">
-				<el-table-column prop="username" label="工號" width="100" />
-				<el-table-column prop="nickname" label="姓名" align="center" width="130" />
+				<el-table-column prop="username" label="工號" min-width="100" />
+				<el-table-column prop="nickname" label="姓名" align="center" min-width="130" />
 				<el-table-column prop="email" label="郵箱" align="center" />
 				<el-table-column prop="phone" label="手機" align="center" />
 				<el-table-column prop="ext" label="分機" align="center" />

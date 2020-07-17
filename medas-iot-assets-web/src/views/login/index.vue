@@ -3,8 +3,7 @@
 		<div class="header">
 			<img src="../../../static/ic_logo.png" class="logo" />
 		</div>
-
-		<div class="login" v-if="!expired">
+		<div class="login">
 			<p class="title">登入</p>
 			<el-form ref="form" :model="form" :rules="rules" size="middle">
 				<el-form-item prop="username">
@@ -17,9 +16,9 @@
 						placeholder="請輸入密碼"
 					/>
 				</el-form-item>
-				<el-form-item prop="vcode">
+				<el-form-item prop="verifyCode" v-if="verify">
 					<el-input
-						v-model="form.vcode"
+						v-model="form.verifyCode"
 						placeholder="請輸入驗證碼"
 						style="width: 150px; float: left"
 						@keyup.enter.native="onSubmit"
@@ -27,45 +26,77 @@
 					<img :src="verCode" style="margin: 5px 16px;" @click="newVerCode" />
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" class="login-button" @click="onSubmit" :loading="logining">{{login}}</el-button>
+					<el-button type="primary" class="login-button" @click="onSubmit" :loading="logining">登入</el-button>
 				</el-form-item>
 			</el-form>
 		</div>
-
-        <div class="login" v-if="expired">
-			<p class="title">修改密碼</p>
-			<el-form ref="user" :model="user" :rules="rules2" size="middle">
-				<el-form-item prop="password">
-					<el-input
-						v-model="user.password"
-						type="password"
-						placeholder="請輸入密碼"
-					/>
-				</el-form-item>
-                <el-form-item prop="newpwd">
-					<el-input
-						v-model="user.newpwd"
-						type="password"
-						placeholder="請輸入新密碼"
-					/>
-				</el-form-item>
-                <el-form-item prop="newpwd2">
-					<el-input
-						v-model="user.newpwd2"
-						type="password"
-						placeholder="請再次輸入新密碼"
-						@keyup.enter.native="setPwdClick"
-					/>
-				</el-form-item>
-				<el-form-item>
-					<el-button type="primary" class="login-button" @click="setPwdClick">修改</el-button>
-				</el-form-item>
-			</el-form>
-		</div>
-
 		<p class="note">此網頁最好使用IE11瀏覽器、Edge瀏覽器、谷歌瀏覽器、蘋果瀏覽器、火狐瀏覽器等新式瀏覽器進行瀏覽。</p>
 	</div>
 </template>
+<script>
+export default {
+    data() {
+        return {
+            form: {
+                username: 'W0515366',
+                password: '12345678',
+                verifyCode: ''
+            },
+            verCode: '',
+            rules: {
+                username: [{required: true, message: '請輸入用戶名', trigger: 'blur'}],
+                password: [{required: true, message: '請輸入密碼', trigger: 'blur'}],
+                verifyCode: [{required: true, message: '請輸入驗證碼', trigger: 'blur'}]
+            },
+            logining: false,
+            login: '登入',
+            verify: false
+        }
+	},
+    methods: {
+        newVerCode(e) {
+			this.verCode = `http://127.0.0.1:8000/vcode?username=${this.form.username}&data=` + Date.parse(new Date())
+        },
+        onSubmit(e) {
+            this.$refs.form.validate(valid => {
+                if (valid) {
+					this.logining = true
+                    this.$axios({
+						url: `/login`,
+                        method: `post`,
+						data: this.form
+                    }).then(res => {
+                        console.log(res)
+                        if (res.status === 200) {
+                            switch (res.data.code) {
+                                case 200:
+									this.$store.dispatch('SetToken', res.data.data.token)
+									this.$store.dispatch('SetTokenHead', res.data.data.tokenHead)
+                                    self.location = '/'
+                                    break
+                                case 1000:
+									this.verify = true
+									this.newVerCode(null)
+									this.showError(res.data.message)
+                                    break
+                                default:
+									this.showError(res.data.message)
+									if (this.verify) this.newVerCode(null)
+                                    break
+                            }
+                        } else {
+                            this.showError(`登入失敗`)
+						}
+						this.logining = false
+                    }).catch(_ => {
+						this.logining = false
+					})
+                }
+            })
+        }
+    }
+}
+</script>
 <style scoped>
 .login-view {
 	position: absolute;
@@ -122,101 +153,3 @@
 	overflow: hidden;
 }
 </style>
-<script>
-export default {
-    data() {
-        return {
-            form: {
-                username: 'W0515366',
-                password: '12345678',
-                vcode: ''
-            },
-            verCode: '',
-            rules: {
-                username: [{required: true, message: '請輸入用戶名', trigger: 'blur'}],
-                password: [{required: true, message: '請輸入密碼', trigger: 'blur'}],
-                vcode: [{required: true, message: '請輸入驗證碼', trigger: 'blur'}]
-            },
-            rules2: {
-                password: [{required: true, message: '請輸入密碼', trigger: 'blur'}],
-                newpwd: [{required: true, message: '請輸入新密碼', trigger: 'blur'}],
-                newpwd2: [{required: true, message: '再次輸入新密碼', trigger: 'blur'}]
-            },
-            needVerify: false,
-            logining: false,
-            login: '登入',
-            user: {
-                username: 'W0515366',
-                password: '',
-                newpwd: '',
-                newpwd2: ''
-            },
-            expired: false
-        }
-	},
-	mounted() {
-		this.newVerCode()
-	},
-    methods: {
-        newVerCode(e) {
-			this.verCode = `http://127.0.0.1:8081/vcode?` + Date.parse(new Date())
-        },
-        onSubmit(e) {
-            this.$refs.form.validate(valid => {
-                if (valid) {
-                    this.$axios({
-						url: `/auth/login`,
-                        method: `post`,
-						data: this.form
-                    }).then(res => {
-                        console.log(res)
-                        if (res.status === 200) {
-                            switch (res.data.status) {
-                                case 200:
-                                    self.location = '/'
-                                    break
-                                case 1001:
-                                    this.showError('需要修改密碼')
-									this.user.username = this.form.username
-									this.user.newpwd = ''
-									this.user.newpwd2 = ''
-                                    this.expired = true
-                                    break
-                                default:
-                                    this.showError(res.data.msg)
-                                    break
-                            }
-                        } else {
-                            this.showError(`登录失败`)
-                        }
-                    })
-                }
-            })
-        },
-        setPwdClick: function(e) {
-            this.$refs.user.validate(valid => {
-                if (valid) {
-					console.log(this.user)
-                    if (this.user.newpwd !== this.user.newpwd2) {
-                        this.showError('兩次輸入的新密碼不匹配，請重新輸入')
-                    } else {
-						this.$axios({
-							url: `/auth/pwd`,
-							method: `post`,
-							data: this.user
-						}).then(res => {
-							console.log(res)
-							if (res.status === 200 && res.data.status === 200) {
-								this.showSuccess('修改成功')
-								this.expired = false
-							} else {
-								this.showError(`修改失敗`);
-							}
-						})
-                    }
-                }
-            })
-        }
-    }
-}
-</script>

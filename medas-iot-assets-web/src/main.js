@@ -32,16 +32,35 @@ Vue.prototype.RES_URL = 'http://127.0.0.1:8081'
 Vue.use(AFTableColumn)
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = false
+
+axios.interceptors.request.use(config => {
+    if (store.getters.token) {
+        config.headers['Authorization'] = store.getters.tokenHead + store.getters.token
+    }
+    return config
+}, error => {
+    console.log(error)
+})
 
 axios.interceptors.response.use(response => {
         console.log(response)
+        if (response.data.code === 401) {
+            self.location = '/#/login'
+            return
+        } else if (response.data.code === 403) {
+            ElementUI.Message({
+                message: '無權訪問',
+                type: 'error',
+                showClose: true
+            })
+        }
         return response
     },
     error => {
         console.log(error.response.status)
         if (error.response.status === 401) {
-            //self.location = '/#/login'
+            // self.location = '/#/login'
         } else if (error.response.status === 403) {
             ElementUI.Message({
                 message: '無權訪問',
@@ -53,10 +72,10 @@ axios.interceptors.response.use(response => {
     })
 
 NProgress.configure({
-    easing: 'ease', // 动画方式    
-    speed: 500, // 递增进度条的速度    
-    showSpinner: false, // 是否显示加载ico    
-    trickleSpeed: 200, // 自动递增间隔    
+    easing: 'ease', // 动画方式
+    speed: 500, // 递增进度条的速度
+    showSpinner: false, // 是否显示加载ico
+    trickleSpeed: 200, // 自动递增间隔
     minimum: 0.3 // 初始化时的最小百分比
 })
 
