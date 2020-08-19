@@ -24,6 +24,11 @@ export default {
         Copyright
     },
     computed: {
+
+    },
+    beforeMount() {
+        console.log(`beforeMount`)
+        this.$store.dispatch('CheckToken')
     },
     mounted() {
         this.$store.dispatch('SetClientHeight', document.documentElement.clientHeight)

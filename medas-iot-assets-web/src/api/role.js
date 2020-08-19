@@ -6,7 +6,7 @@ import axios from 'axios'
  */
 export async function createRole(role) {
     return axios({
-        url: `/role/create`,
+        url: `/api/admin/role/create`,
         method: 'post',
         data: role
     })
@@ -19,7 +19,7 @@ export async function createRole(role) {
  */
 export async function updateRole(roleid, role) {
     return axios({
-        url: `/role/update/${roleid}`,
+        url: `/api/admin/role/update/${roleid}`,
         method: 'post',
         data: role
     })
@@ -30,7 +30,7 @@ export async function updateRole(roleid, role) {
  */
 export async function fetchAllRoleList() {
     return axios({
-        url: `/role/listAll`,
+        url: `/api/admin/role/listAll`,
         method: `get`
     })
 }
@@ -41,7 +41,7 @@ export async function fetchAllRoleList() {
  */
 export async function fetchList(param) {
     return axios({
-        url: `/role/list`,
+        url: `/api/admin/role/list`,
         method: `get`,
         params: param
     })
@@ -55,9 +55,9 @@ export async function deleteRole(roleid) {
     let ids = []
     ids.push(roleid)
     let params = new URLSearchParams()
-    params.append("ids", ids)
+    params.append('ids', ids)
     return axios({
-        url: `/role/delete`,
+        url: `/api/admin/role/delete`,
         method: `post`,
         data: params
     })
@@ -70,28 +70,28 @@ export async function deleteRole(roleid) {
  */
 export async function disableRole(roleid, status) {
     return axios({
-        url: `/role/updateStatus/${roleid}?status=${status}`,
+        url: `/api/admin/role/updateStatus/${roleid}?status=${status}`,
         method: `post`
     })
 }
 
 export async function listMenuByRole(roleid) {
     return axios({
-        url: `/role/listMenu/${roleid}`,
+        url: `/api/admin/role/listMenu/${roleid}`,
         method: `get`
     })
 }
 
 export async function listResourceByRole(roleid) {
     return axios({
-        url: `/role/listResource/${roleid}`,
+        url: `/api/admin/role/listResource/${roleid}`,
         method: `get`
     })
 }
 
 export async function allocMenu(data) {
     return axios({
-        url: `/role/allocMenu`,
+        url: `/api/admin/role/allocMenu`,
         method: `post`,
         data: data
     })
@@ -99,7 +99,7 @@ export async function allocMenu(data) {
 
 export async function allocResource(data) {
     return axios({
-        url: `/role/allocResource`,
+        url: `/api/admin/role/allocResource`,
         method: `post`,
         data: data
     })

@@ -4,6 +4,10 @@ const TokenKey = 'token'
 
 const TokenHead = 'tokenHead'
 
+const Menus = 'menus'
+
+const Mine = 'mine'
+
 export function getToken() {
     return Cookies.get(TokenKey)
 }
@@ -26,4 +30,28 @@ export function setTokenHead(tokenHead) {
 
 export function removeTokenHead() {
     return Cookies.remove(TokenHead)
+}
+
+export function setMenus(menus) {
+    localStorage.setItem(Menus, JSON.stringify(menus))
+}
+
+export function getMenus() {
+    return JSON.parse(localStorage.getItem(Menus))
+}
+
+export function removeMenus() {
+    localStorage.removeItem(Menus)
+}
+
+export function setMine(mine) {
+    localStorage.setItem(Mine, JSON.stringify(mine))
+}
+
+export function getMine() {
+    return JSON.parse(localStorage.getItem(Mine))
+}
+
+export function removeMine() {
+    localStorage.removeItem(Mine)
 }

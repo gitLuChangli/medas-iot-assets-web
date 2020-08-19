@@ -38,167 +38,36 @@ import { mapGetters } from 'vuex'
 export default {
     computed: {
         ...mapGetters([
-            'sidebar'
+			'sidebar',
+			'menus'
         ])
     },
     data() {
-        return {          
-            menuData: [
-					{
-						name: '首頁',
-						path: '/',
-						icon: 'el-icon-s-data',
-						items: [
-							{
-								name: '主控台',
-								path: '/main'
-							},
-							{
-								name: '監控台',
-								path: '/view'
-							},
-							{
-								name: '工作台',
-								path: '/workspace'
-							}
-						]
-					},
-					{
-						name: '用戶管理',
-						path: '/user',
-						icon: 'el-icon-s-custom',
-						items: [
-							{
-								name: '用戶列表',
-								path: '/user/'
-							}
-						]
-					},
-					{
-						name: '固定資產',
-						path: '/assets',
-						icon: 'el-icon-coin',
-						items: [
-							{
-								name: '導入資產',
-								path: '/assets/import'
-							},
-							{
-								name: '資產列表',
-								path: '/assets/list'
-							}
-						]
-					},
-					{
-						name: '資產盤點',
-						path: '/inventory',
-						icon: 'el-icon-s-claim',
-						items: [
-							{
-								name: '盤點工單',
-								path: '/inventory/list'
-							},
-							{
-								name: '我的工單',
-								path: '/inventory/mine'
-							}
-						]
-					},
-					{
-						name: '應用管理',
-						path: '/app',
-						icon: 'el-icon-s-promotion',
-						items: [
-							{
-								name: '應用列表',
-								path: '/app/list'
-							},
-							{
-								name: '應用版本',
-								path: '/app/version'
-							},
-							{
-								name: '安排升級',
-								path: '/app/task'
-							},
-							{
-								name: '升級記錄',
-								path: '/app/records'
-							}
-						]
-					},
-					{
-						name: '消息管理',
-						path: '/msg',
-						icon: 'el-icon-s-comment',
-						items: []
-					},
-					{
-						name: '設備管理',
-						path: '/device/',
-						icon: 'el-icon-cpu',
-						items: [
-							{
-								name: '設備類型',
-								path: '/device/type'
-							},
-							{
-								name: '設備版本',
-								path: '/device/version'
-							},
-							{
-								name: '錄入設備',
-								path: '/device/add'
-							},
-							{
-								name: '設備列表',
-								path: '/device/list'
-							},
-							{
-								name: '生產數據',
-								path: '/device/data'
-							},
-							{
-								name: '異常數據',
-								path: '/device/exception'
-							}
-						]
-					},
-					{
-						name: '系統管理',
-						path: '/system',
-						icon: 'el-icon-s-tools',
-						items: [{
-							name: '角色列表',
-							path: '/ums/role'
-						},
-						{
-							name: '菜單列表',
-							path: '/ums/menu'
-						},
-						{
-							name: '資源列表',
-							path: '/ums/resource'
-						},
-						{
-							name: '部門列表',
-							path: '/ums/company'
-						},
-						{
-							name: '用戶列表',
-							path: '/ums/admin'
-						}]
-					},
-					{
-						name: '個人中心',
-						path: '/me',
-						icon: 'el-icon-s-help',
-						items: []
-					}
-				]
+        return {
+            menuData: []
         }
-    },
-    methods: {        
+	},
+	mounted() {
+		this.menuData = []
+		for (let i = 0; i < this.menus.length; i++) {
+			let children = []
+			for (let j = 0; j < this.menus[i].children.length; j++) {
+				if (this.menus[i].children[j].hidden === 1) {
+					children.push({
+						name: this.menus[i].children[j].title,
+						path: this.menus[i].children[j].name
+					})
+				}
+			}
+			this.menuData.push({
+				name: this.menus[i].title,
+				path: this.menus[i].name,
+				icon: this.menus[i].icon,
+				items: children
+			})
+		}
+	},
+    methods: {
     }
 }
 </script>

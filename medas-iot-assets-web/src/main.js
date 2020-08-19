@@ -27,7 +27,8 @@ Vue.prototype.$qs = qs
 Vue.prototype.$store = store
 Vue.prototype.$echarts = echarts
 
-Vue.prototype.RES_URL = 'http://127.0.0.1:8081'
+Vue.prototype.RES_URL = 'http://127.0.0.1:8001'
+Vue.prototype.SERVICE_URL = 'http://127.0.0.1:8000'
 
 Vue.use(AFTableColumn)
 

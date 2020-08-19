@@ -5,11 +5,11 @@
 		</div>
         <div class="content">
 			<el-table :data="items" border stripe size="mini" style="margin-bottom: 16px" :max-height="clientHeight - 250">
-				<el-table-column prop="asset.gzhNum" label="管制編標" align="center" min-width="140" />
-                <el-table-column prop="asset.cchNum" label="財產編號" align="center" min-width="120" />
-                <el-table-column prop="asset.shbName" label="設備名稱" align="center" :show-overflow-tooltip="true" />
-                <el-table-column prop="asset.shbBrand" label="設備品牌" align="center" :show-overflow-tooltip="true" />
-                <el-table-column prop="asset.shbSpec" label="設備規格" align="center" min-width="200" :show-overflow-tooltip="true" />
+				<el-table-column prop="gzhNum" label="管制編標" align="center" min-width="140" />
+                <el-table-column prop="cchNum" label="財產編號" align="center" min-width="120" />
+                <el-table-column prop="shbName" label="設備名稱" align="center" :show-overflow-tooltip="true" />
+                <el-table-column prop="shbBrand" label="設備品牌" align="center" :show-overflow-tooltip="true" />
+                <el-table-column prop="shbSpec" label="設備規格" align="center" min-width="200" :show-overflow-tooltip="true" />
                 <el-table-column prop="completeTime" label="盤點時間" align="center" min-width="150" />
                 <el-table-column prop="username" label="盤點人" align="center" :show-overflow-tooltip="true">
                     <template slot-scope="scope">

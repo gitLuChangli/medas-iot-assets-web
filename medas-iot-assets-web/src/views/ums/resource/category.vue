@@ -56,7 +56,7 @@
 	</div>
 </template>
 <script>
-	import { listResourceCategories, createResourceCategory, updateResourceCategory, deleteResourceCategory } from '../../../api/resourceCategory.js'
+	import { listResourceCategories, createResourceCategory, updateResourceCategory, deleteResourceCategory } from '@/api/resourceCategory.js'
 	export default {
 		data() {
 			return {

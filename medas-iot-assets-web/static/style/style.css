@@ -157,7 +157,7 @@
   line-height: 32px !important;
   text-align: center;
   color: #484848;
-  border-top: 1px solid #e6eae3;
+  border-top: 0px solid #e6eae3;
 }
 
 .toolbar {
@@ -223,7 +223,3 @@
   background: #ffffff;
   padding: 16px;
 }
-/**
-th {
-  background: rgb(236, 245, 255) !important;
-}*/

@@ -5,18 +5,15 @@
 		<el-dropdown class="dd">
 			<el-button class="btn">
 				<el-avatar :size="size" :src="avatar" class="icon"></el-avatar>
-				<span>卢昌利</span>
+				<span>{{mine.username}} / {{mine.nickname}}</span>
 				<i class="el-icon-arrow-down el-icon--right"></i>
 			</el-button>
 			<el-dropdown-menu slot="dropdown">
-				<el-dropdown-item>
-					<i class="el-icon-user" />个人信息
+				<el-dropdown-item @click.native="infoClick">
+					<i class="el-icon-user" />個人信息
 				</el-dropdown-item>
-				<el-dropdown-item>
-					<i class="el-icon-lock" />修改密码
-				</el-dropdown-item>
-				<el-dropdown-item @click="logoutClick">
-					<i class="el-icon-switch-button" />退出登录
+				<el-dropdown-item @click.native="logoutClick">
+					<i class="el-icon-switch-button" />登出
 				</el-dropdown-item>
 			</el-dropdown-menu>
 		</el-dropdown>
@@ -39,7 +36,8 @@
 		computed: {
 			...mapGetters([
 				'sidebar',
-				'avatar'
+				'avatar',
+				'mine'
 			])
 		},
 		data() {
@@ -53,10 +51,14 @@
 			toggleSideBar() {
 				this.$store.dispatch('ToggleSideBar')
 			},
-			logoutClick() {
+			logoutClick: function(e) {
+				console.log(`logout click`)
 				this.$store.dispatch('Logout').then(_ => {
-					location.reload()
+					self.location = '/#/login'
 				})
+			},
+			infoClick: function(e) {
+				self.location = '/#/mine/index'
 			}
 		}
 	}

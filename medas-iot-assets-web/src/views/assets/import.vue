@@ -16,7 +16,7 @@
 			>保存</el-button>
 		</div>
 		<div class="content" v-show="show_table">
-			<el-table :data="assets.assets" border stripe size="mini" v-loading="listLoading" :max-height="clientHeight - 210" :fit="true">
+			<el-table :data="assets" border stripe size="mini" v-loading="listLoading" :max-height="clientHeight - 210" :fit="true">
 				<el-table-column type="index" width="50" align="center" fixed />
 				<el-table-column
 					prop="gzhNum"
@@ -30,31 +30,9 @@
 				<af-table-column prop="shbName" label="設備名稱" align="center" />
 				<af-table-column prop="shbBrand" label="設備品牌" align="center" />
 				<af-table-column prop="shbSpec" label="設備規格" align="center" />
-				<af-table-column prop="fyType" label="費用類型" align="center" />
-				<af-table-column prop="unit" label="單位" align="center" />
-				<af-table-column prop="price" label="單價" align="center" />
-				<el-table-column prop="chshCode" label="廠商代碼" align="center" width="180px" />
-				<af-table-column prop="chshName" label="廠商名稱" align="center" />
-				<af-table-column prop="xqDepartment" label="需求部門" align="center" />
-				<af-table-column prop="shbArea" label="設備面積" align="center" />
-				<af-table-column prop="shbWeight" label="設備重量" align="center" />
-				<af-table-column prop="shbSN" label="設備編號" align="center" />
-				<af-table-column prop="project" label="所在專案" align="center" />
-				<af-table-column prop="segment" label="專案段別" align="center" />
-				<af-table-column prop="gzhName" label="工站名" align="center" />
-				<af-table-column prop="shbStatus" label="設備狀態" align="center" />
 				<af-table-column prop="building" label="樓棟" align="center" />
 				<af-table-column prop="floor" label="樓層" align="center" />
 				<af-table-column prop="xianti" label="線體" align="center" />
-				<af-table-column prop="poNum" label="PO單號" align="center" />
-				<af-table-column prop="lyEmp" label="領用工號" align="center" />
-				<af-table-column prop="lyEmpName" label="領用姓名" align="center" />
-				<af-table-column prop="dhTime" label="到貨時間" align="center" />
-				<af-table-column prop="jyTime" label="檢驗時間" align="center" />
-				<af-table-column prop="jyCycle" label="檢驗週期" align="center" />
-				<af-table-column prop="note" label="備註" align="center" />
-				<af-table-column prop="operator" label="操作人" align="center" />
-				<af-table-column prop="operateTime" label="操作時間" align="center" />
 			</el-table>
 		</div>
 		<el-dialog
@@ -67,7 +45,7 @@
 		>
 			<div style="text-align: center;">
 				<el-upload
-					action="http://127.0.0.1:8001/assets"
+					:action="RES_URL + '/assets'"
 					list-type="picture-card"
 					:on-preview="handlePreview"
 					:on-remove="handleRemove"
@@ -81,7 +59,7 @@
 </template>
 <script>
 	import { mapGetters } from 'vuex'
-	import { importAssets } from '@/api/assets'
+	import { importAssets } from '@/api/assetInventory'
 	export default {
 		computed: {
 			...mapGetters([
@@ -93,15 +71,12 @@
 				show_dialog: false,
 				listLoading: false,
 				show_table: false,
-				assets: {
-					companyId: '70321065267560448',
-					assets: []
-				}
+				assets: []
 			}
 		},
 		methods: {
 			templateClick: function (e) {
-				window.open(`http://127.0.0.1:8001/assets/template`)
+				window.open(`${this.RES_URL}/assets/template`)
 			},
 			clearClick: function (e) {
 				this.assets.assets = []
@@ -113,7 +88,7 @@
 				console.log(response)
 				this.show_dialog = false
 				if (response.code === 200) {
-					this.assets.assets = response.data
+					this.assets = response.data
 					this.show_table = true
 					this.showSuccess(`上傳成功`)
 				} else {

@@ -76,8 +76,8 @@
 	</div>
 </template>
 <script>
-	import { listResourceCategories } from '../../../api/resourceCategory.js'
-	import { fetchList, createResource, updateResource, deleteResource } from '../../../api/resource.js'
+	import { listResourceCategories } from '@/api/resourceCategory.js'
+	import { fetchList, createResource, updateResource, deleteResource } from '@/api/resource.js'
 	const defaultResource = {
 		id: null,
 		name: null,

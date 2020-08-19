@@ -126,7 +126,7 @@
 </template>
 <script>
 	import { queryCompanies } from '@/api/company'
-	import { queryUsers, createUser, updateUser, deleteUser, disableUser, queryCompanyRelation, resetPassword, getUserRoles, updateUserRoles } from '@/api/login'
+	import { queryUsers, createUser, updateUser, deleteUser, disableUser, queryCompanyRelation, resetPassword, getUserRoles, updateUserRoles } from '@/api/user'
     import { fetchAllRoleList } from '@/api/role'
 	const defaultUser = {
 		id: null,
@@ -214,8 +214,14 @@
 			roleClick: function (row) {
                 getUserRoles(row.id).then(res => {
                     if (res.data.code === 200) {
-                        this.userRole.adminId = row.id
-                        this.userRole.roleIds = res.data.data
+						this.userRole.adminId = row.id
+						if (res.data.data !== null) {
+							let ids = []
+							for (let i = 0; i < res.data.data.length; i++) {
+								ids.push(res.data.data[i].id)
+							}
+							this.userRole.roleIds = ids
+						}
                         this.show_dialog_role = true
                     } else {
                         this.showError(`獲取用戶角色信息失敗`)

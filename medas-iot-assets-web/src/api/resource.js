@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export async function fetchList(params) {
     return axios({
-        url: `/resource/list`,
+        url: `/api/admin/resource/list`,
         method: `get`,
         params: params
     })
@@ -10,7 +10,7 @@ export async function fetchList(params) {
 
 export async function createResource(resource) {
     return axios({
-        url: `/resource/create`,
+        url: `/api/admin/resource/create`,
         method: `post`,
         data: resource
     })
@@ -18,7 +18,7 @@ export async function createResource(resource) {
 
 export async function updateResource(id, resource) {
     return axios({
-        url: `/resource/update/${id}`,
+        url: `/api/admin/resource/update/${id}`,
         method: `post`,
         data: resource
     })
@@ -26,14 +26,14 @@ export async function updateResource(id, resource) {
 
 export async function deleteResource(id) {
     return axios({
-        url: `/resource/delete/${id}`,
-        method: `pst`        
+        url: `/api/admin/resource/delete/${id}`,
+        method: `post`
     })
 }
 
 export async function fetchAllResourceList() {
     return axios({
-        url: `/resource/listAll`,
+        url: `/api/admin/resource/listAll`,
         method: `get`
     })
 }

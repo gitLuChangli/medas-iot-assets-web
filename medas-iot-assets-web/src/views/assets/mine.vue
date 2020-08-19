@@ -69,16 +69,15 @@
 	</div>
 </template>
 <script>
-	import { queryByUsername } from '@/api/inventory'
+	import { mineOrders } from '@/api/assetInventory'
 	export default {
 		data() {
 			return {
 				listLoading: false,
 				orders: [],
-				username: 'W0515368',
 				qp: {
 					page: 1,
-					size: 0,
+					size: 15,
 					start: null,
 					end: null
 				},
@@ -99,7 +98,7 @@
 				if (this.qp.end !== null) {
 					params.append('end', this.qp.end)
 				}
-				queryByUsername(this.username, params).then(res => {
+				mineOrders(params).then(res => {
 					if (res.data.code === 200) {
 						this.orders = res.data.data.list
 						this.total = res.data.data.total

@@ -15,7 +15,7 @@ import axios from 'axios'
     */
 export async function saveCompany(modify, company) {
     var _method = modify ? 'put' : 'post'
-    var _url = modify ? `/api/company/${company.id}` : `/api/company/`
+    var _url = modify ? `/api/admin/company/${company.id}` : `/api/company/`
     return axios({
         url: _url,
         data: company,
@@ -30,7 +30,7 @@ export async function saveCompany(modify, company) {
  */
 export async function disableCompany(companyId, status) {
     return axios({
-        url: `/api/company/disable/${companyId}/${status}`,
+        url: `/api/admin/company/disable/${companyId}/${status}`,
         method: `put`
     })
 }
@@ -41,7 +41,7 @@ export async function disableCompany(companyId, status) {
  */
 export async function deleteCompany(companyId) {
     return axios({
-        url: `/api/company/${companyId}`,
+        url: `/api/admin/company/${companyId}`,
         method: `delete`
     })
 }
@@ -51,7 +51,7 @@ export async function deleteCompany(companyId) {
  */
 export async function queryCompanies() {
     return axios({
-        url: `/api/company/`,
+        url: `/api/admin/company/`,
         method: `get`
     })
 }

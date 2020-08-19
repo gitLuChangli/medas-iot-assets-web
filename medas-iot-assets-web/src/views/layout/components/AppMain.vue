@@ -7,9 +7,6 @@
 </template>
 <script>
 export default {
-    name: 'AppMain',
-    mounted() {
-        console.log(`AppMain load`)
-    }
+    name: 'AppMain'
 }
 </script>

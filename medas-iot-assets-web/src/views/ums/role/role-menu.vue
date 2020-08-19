@@ -52,7 +52,7 @@
                         if (menus !== null && menus.length > 0) {
                             for (var i = 0; i < menus.length; i++) {
                                 var menu = menus[i]
-                                if (menu.parentId !== 0) {
+                                if (menu.parentId !== 0 && menu.level > 0) {
                                     checkedIds.push(menu.id)
                                 }
                             }

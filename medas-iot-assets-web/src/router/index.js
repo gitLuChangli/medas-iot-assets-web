@@ -14,6 +14,7 @@ export default new Router({
     {
         path: '',
         component: Layout,
+        /*
         redirect: '/home',
         children: [{
             path: 'home',
@@ -22,11 +23,13 @@ export default new Router({
                 import('@/views/home/index'),
             meta: { title: '首頁', icon: 'el-icon-s-data' }
         }]
+        */
+       redirect: '/assets/mine'
     }, {
         path: '/assets',
         component: Layout,
         redirect: '/assets/list',
-        name: 'inventory',
+        name: 'assets',
         meta: { title: '固定資產', icon: 'el-icon-s-claim' },
         children: [{
             path: 'import',
@@ -40,31 +43,24 @@ export default new Router({
             component: () =>
                 import('@/views/assets/index'),
             meta: { title: '資產列表' }
-        }]
-    }, {
-        path: '/inventory',
-        component: Layout,
-        redirect: '/inventory/list',
-        name: 'inventory',
-        meta: { title: '資產盤點', icon: 'el-icon-s-claim' },
-        children: [{
-            path: 'list',
-            name: 'list',
+        }, {
+            path: 'work',
+            name: 'work',
             component: () =>
-                import('@/views/inventory/index'),
-            meta: { title: '盤點工單' }
+                import('@/views/assets/work'),
+            meta: { title: '盘点工单' }
         }, {
             path: 'mine',
             name: 'mine',
             component: () =>
-                import('@/views/inventory/mine'),
+                import('@/views/assets/mine'),
             meta: { title: '我的工單' }
         }, {
-            path: 'detials',
+            path: 'details',
             name: 'details',
             component: () =>
-                import('@/views/inventory/details'),
-            meta: { title: '資產清單' }
+                import('@/views/assets/details'),
+            meta: { title: '盤點清單' }
         }]
     },
     {
@@ -138,6 +134,29 @@ export default new Router({
                 import('@/views/ums/admin/index'),
             meta: { title: '用戶列表' }
         }
+        ]
+    },
+    {
+        path: '/mine',
+        component: Layout,
+        redirect: '/mine/index',
+        name: 'mine',
+        meta: { title: '個人中心', icon: 'el-icon-s-help' },
+        children: [
+            {
+                path: 'index',
+                name: 'index',
+                component: () =>
+                    import('@/views/mine/index'),
+                meta: { title: '個人信息' }
+            },
+            {
+                path: 'log',
+                name: 'log',
+                component: () =>
+                    import('@/views/mine/log'),
+                meta: { title: '操作日誌' }
+            }
         ]
     }
     ]

@@ -14,6 +14,7 @@
 						v-model="form.password"
 						type="password"
 						placeholder="請輸入密碼"
+						@keyup.enter.native="onSubmit"
 					/>
 				</el-form-item>
 				<el-form-item prop="verifyCode" v-if="verify">
@@ -34,12 +35,13 @@
 	</div>
 </template>
 <script>
+import { mineMenus, mineInfo } from '@/api/mine.js'
 export default {
     data() {
         return {
             form: {
-                username: 'W0515366',
-                password: '12345678',
+                username: '',
+                password: '',
                 verifyCode: ''
             },
             verCode: '',
@@ -55,7 +57,7 @@ export default {
 	},
     methods: {
         newVerCode(e) {
-			this.verCode = `http://127.0.0.1:8000/vcode?username=${this.form.username}&data=` + Date.parse(new Date())
+			this.verCode = `${this.RES_URL}/vcode?username=${this.form.username}&data=` + Date.parse(new Date())
         },
         onSubmit(e) {
             this.$refs.form.validate(valid => {
@@ -72,7 +74,8 @@ export default {
                                 case 200:
 									this.$store.dispatch('SetToken', res.data.data.token)
 									this.$store.dispatch('SetTokenHead', res.data.data.tokenHead)
-                                    self.location = '/'
+									this.mineMenus()
+                                    // self.location = '/'
                                     break
                                 case 1000:
 									this.verify = true
@@ -93,7 +96,23 @@ export default {
 					})
                 }
             })
-        }
+		},
+		mineMenus() {
+			mineMenus().then(res => {
+				if (res.data.code === 200) {
+					this.$store.dispatch('SetMenus', res.data.data)
+					this.mineInfo()
+				}
+			})
+		},
+		mineInfo() {
+			mineInfo().then(res => {
+				if (res.data.code === 200) {
+					this.$store.dispatch('SetMine', res.data.data)
+					self.location = '/'
+				}
+			})
+		}
     }
 }
 </script>

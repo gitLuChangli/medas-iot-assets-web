@@ -12,7 +12,7 @@
 				size="mini"
 			/>
 			<span style="margin-left: 16px;">盤點人工號：</span>
-			<el-input placeholder="請輸入工號" v-model="qp.keyword" size="mini" style="width: 250px" clearable />
+			<el-input placeholder="請輸入工號或工單號" v-model="qp.keyword" size="mini" style="width: 250px" clearable />
 			<el-button
 				type="primary"
 				size="mini"
@@ -31,7 +31,7 @@
 				v-loading="listLoading"
 				style="margin-bottom: 12px;"
 			>
-				<el-table-column prop="id" label="工單號" align="center" min-width="180px" />
+				<el-table-column prop="num" label="工單號" align="center" min-width="180px" />
 				<el-table-column label="盤點人工號" align="center" min-width="180px" :show-overflow-tooltip="true">
 					<template slot-scope="scope">
 						<label
@@ -61,14 +61,15 @@
 				<el-table-column label="操作" align="center" width="240px">
 					<template slot-scope="scope">
 						<el-button size="mini" type="text" @click="detailClick(scope.row)">詳情</el-button>
-						<el-button size="mini" type="text" @click="userClick(scope.row)" :disabled="scope.row.status === 1">分配盤點人</el-button>
+						<el-button size="mini" type="text" @click="downloadClick(scope.row)">下載</el-button>
+						<el-button size="mini" type="text" @click="userClick(scope.row)" :disabled="scope.row.status === 1">盤點人</el-button>
 						<el-button
 							size="mini"
 							type="text"
 							@click="completeClick(scope.row)"
 							:disabled="scope.row.status === 1"
 						>結單</el-button>
-						<el-button size="mini" type="text" @click="deleteClick(scope.row)" :disabled="scope.row.status === 1">刪除</el-button>
+						<el-button size="mini" type="text" @click="deleteClick(scope.row)">刪除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -111,7 +112,7 @@
 	</div>
 </template>
 <script>
-	import { queryInventory, setWorkers, completeInventory, deleteInventory } from '@/api/inventory'
+	import { queryInventory, setWorkers, completeInventory, deleteInventory, downloadMyWork } from '@/api/assetInventory'
 	import { queryCompanyUsers } from '@/api/user'
 
 	export default {
@@ -119,11 +120,10 @@
 			return {
 				listLoading: false,
 				orders: [],
-				companyId: '70321065267560448',
 				qp: {
 					keyword: null,
 					page: 1,
-					size: 0,
+					size: 30,
 					start: null,
 					end: null
 				},
@@ -152,7 +152,7 @@
 				if (this.qp.keyword !== null) {
 					params.append('keyword', this.qp.keyword)
 				}
-				queryInventory(this.companyId, params).then(res => {
+				queryInventory(params).then(res => {
 					if (res.data.code === 200) {
 						this.orders = res.data.data.list
 						this.total = res.data.data.total
@@ -163,7 +163,7 @@
 				this.$router.push({ name: 'details', params: { details: row.items } })
 			},
 			userClick: function (row) {
-				queryCompanyUsers(this.companyId).then(res => {
+				queryCompanyUsers().then(res => {
 					if (res.data.code === 200) {
 						this.users = res.data.data
 						this.woUser.id = row.id
@@ -236,6 +236,21 @@
 					this.qp.end = null
 				}
 				this.queryInventory()
+			},
+			downloadClick: function(row) {
+				downloadMyWork(row.id).then(res => {
+					if (res.status === 200) {
+						var blob = new Blob([res.data])
+						var downloadElement = document.createElement('a')
+						var href = window.URL.createObjectURL(blob) // 创建下载的链接
+						downloadElement.href = href
+						downloadElement.download = row.num + '.xlsx' // 下载后文件名
+						document.body.appendChild(downloadElement)
+						downloadElement.click() // 点击下载
+						document.body.removeChild(downloadElement) // 下载完成移除元素
+						window.URL.revokeObjectURL(href) // 释放掉blob对象
+					}
+				})
 			}
 		}
 	}
